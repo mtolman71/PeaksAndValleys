@@ -15,9 +15,6 @@ public class Game extends Canvas implements Runnable {
 		//new Game();
 		Window game = new Window(WIDTH, HEIGHT, "Peaks and Valleys");
 		
-		for(PlayerType type : PlayerType.values()) {
-			System.out.println(type);
-		}
 	}
 
 	public void run() {

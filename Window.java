@@ -6,18 +6,72 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
-public class Window extends Canvas implements ActionListener{
+public class Window extends Canvas implements ActionListener, ItemListener{
 
 	private static final long serialVersionUID = 12L;
 	
 	public static final int WIDTH = 640, HEIGHT = 480;
+	
+	
+	public JMenuBar createMenuBar() {
+        JMenuBar menuBar;
+        JMenu menu;
+        JMenuItem menuItem;
+
+        //Create the menu bar.
+        menuBar = new JMenuBar();
+
+        //Build the first menu.
+        menu = new JMenu("Menu");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription(
+                "Game Menu");
+        menuBar.add(menu);
+
+        //a group of JMenuItems
+        menuItem = new JMenuItem("New Game",
+                                 KeyEvent.VK_N);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_N, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription(
+                "New Game");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        
+        menuItem = new JMenuItem("View High Scores",
+                KeyEvent.VK_H);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+        		KeyEvent.VK_H, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription(
+        			"View High Scores");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+        menu.addSeparator();
+        
+        menuItem = new JMenuItem("Quit Game",
+                KeyEvent.VK_Q);
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(
+        		KeyEvent.VK_Q, ActionEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription(
+        			"Quit the Game");
+        menuItem.addActionListener(this);
+        menu.add(menuItem);
+
+        return menuBar;
+    }
 	
 	public Window (int width, int height, String title) {
 			
@@ -39,6 +93,8 @@ public class Window extends Canvas implements ActionListener{
 		
 		
 		HomeScreen();{
+		frame.setJMenuBar(createMenuBar());
+			
 		panel1.setBackground(Color.gray);
 		panel2.setBackground(Color.BLACK);
 			
@@ -55,7 +111,7 @@ public class Window extends Canvas implements ActionListener{
 		panel2.add(home);
 		panel2.add(dispHS);
 		
-		String playerName = name.toString();
+		//String playerName = name.toString();
 		
 			
 		home.addActionListener(new ActionListener() {
@@ -106,6 +162,11 @@ public class Window extends Canvas implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
 		
 	}
 	
