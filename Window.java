@@ -89,6 +89,7 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		JButton dispHS = new JButton("Display High Scores");
 		JLabel player = new JLabel("Enter your name:");
 		JLabel username = new JLabel("Enter your username:");
+		JLabel charName = new JLabel("Enter your character name:");
 		JLabel type = new JLabel("Select your player type:");
 		JButton cowboy = new JButton("Cowboy");
 		JButton ninja = new JButton("Ninja");
@@ -96,6 +97,7 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		JButton viking = new JButton("Viking");
 		JTextField pName = new JTextField(20);
 		JTextField uName = new JTextField(20);
+		JTextField cName = new JTextField(20);
 		
 		
 		
@@ -103,22 +105,36 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		frame.setJMenuBar(createMenuBar());
 			
 		panel1.setBackground(Color.gray);
+		panel1.setPreferredSize(new Dimension(640, 140));
+		panel1.setMinimumSize(new Dimension(640, 140));
+		panel1.setMaximumSize(new Dimension(640, 140));
 		panel2.setBackground(Color.DARK_GRAY);
 		panel3.setBackground(Color.black);
-			
+		panel3.setPreferredSize(new Dimension(640, 50));
+		panel3.setMinimumSize(new Dimension(640, 50));
+		panel3.setMaximumSize(new Dimension(640, 50));
+		
 		frame.getContentPane().add(panel1, BorderLayout.NORTH);
 		frame.getContentPane().add(panel2, BorderLayout.CENTER);
 		frame.getContentPane().add(panel3, BorderLayout.PAGE_END);
+		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		c.insets = new Insets(5,5,5,5);
+		//c.weightx = c.weighty = 1.0;
+		c.insets = new Insets(2,2,2,2);
 		c.anchor = GridBagConstraints.LINE_END;
-		player.setFont(new Font("Serif", Font.BOLD, 20));
+		player.setFont(new Font("Serif", Font.BOLD, 25));
+		player.setForeground(Color.DARK_GRAY);
 		panel1.add(player,c);
 		c.gridy++;
-		username.setFont(new Font("Serif", Font.BOLD, 20));
+		username.setFont(new Font("Serif", Font.BOLD, 25));
+		username.setForeground(Color.DARK_GRAY);
 		panel1.add(username,c);
+		c.gridy++;
+		charName.setFont(new Font("Serif", Font.BOLD, 24));
+		charName.setForeground(Color.DARK_GRAY);
+		panel1.add(charName,c);
 		
 		c.anchor = GridBagConstraints.LINE_START;
 		c.gridx = 1;
@@ -126,6 +142,8 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		panel1.add(pName,c);
 		c.gridy++;
 		panel1.add(uName,c);
+		c.gridy++;
+		panel1.add(cName,c);
 		
 		
 		c.anchor = GridBagConstraints.CENTER;
@@ -134,33 +152,41 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		c.gridwidth = 4;
 		c.fill = GridBagConstraints.CENTER;
 		type.setFont(new Font("Serif", Font.BOLD, 30));
-		type.setForeground(Color.gray);
+		type.setForeground(Color.GRAY);
 		panel2.add(type, c);
 		c.gridx = 0;
-		c.gridy = 3;
+		c.gridy = 1;
 		c.gridwidth = 1;
 		c.fill = GridBagConstraints.HORIZONTAL;
+		cowboy.setForeground(Color.DARK_GRAY);
 		panel2.add(cowboy,c);
 		c.gridx++;
+		ninja.setForeground(Color.DARK_GRAY);
 		panel2.add(ninja,c);
 		c.gridx++;
+		spaceman.setForeground(Color.DARK_GRAY);
 		panel2.add(spaceman,c);
 		c.gridx++;
+		viking.setForeground(Color.DARK_GRAY);
 		panel2.add(viking,c);
 		c.gridx = 0;
 		c.gridy = 4;
 		c.gridwidth = 4;
 		c.gridheight = 2;
 		c.fill = GridBagConstraints.BOTH;
+		beginGame.setFont(new Font("", Font.PLAIN,20));
+		beginGame.setForeground(Color.DARK_GRAY);
 		panel2.add(beginGame,c);
 		
 		c.gridx = 0;
 		c.gridy = 0;
-		c.gridwidth = 2;
+		c.gridwidth = 1;
+		c.weightx = c.weighty = 1.0;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		panel3.add(home,c);
-		c.gridx = 2;
+		c.gridx = 3;
 		panel3.add(dispHS,c);
+		frame.pack();
 		
 		//String playerName = pName.toString();
 		
