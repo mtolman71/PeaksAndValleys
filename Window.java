@@ -4,11 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -76,19 +81,21 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 	public Window (int width, int height, String title) {
 			
 		JFrame frame = new JFrame(title);
-		JPanel panel1 = new JPanel();
-		JPanel panel2 = new JPanel();
-		JButton home = new JButton("Home");
+		JPanel panel1 = new JPanel(new GridBagLayout());
+		JPanel panel2 = new JPanel(new GridBagLayout());
+		JPanel panel3 = new JPanel(new GridBagLayout());
+		JButton home = new JButton("Home Screen");
 		JButton beginGame = new JButton("Begin Game");
 		JButton dispHS = new JButton("Display High Scores");
-		JLabel player = new JLabel("Please enter your name:");
-		JLabel type = new JLabel("Please select your player type:");
+		JLabel player = new JLabel("Enter your name:");
+		JLabel username = new JLabel("Enter your username:");
+		JLabel type = new JLabel("Select your player type:");
 		JButton cowboy = new JButton("Cowboy");
 		JButton ninja = new JButton("Ninja");
 		JButton spaceman = new JButton("Spaceman");
 		JButton viking = new JButton("Viking");
-		JTextField name = new JTextField(30);
-		
+		JTextField pName = new JTextField(20);
+		JTextField uName = new JTextField(20);
 		
 		
 		
@@ -96,22 +103,66 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		frame.setJMenuBar(createMenuBar());
 			
 		panel1.setBackground(Color.gray);
-		panel2.setBackground(Color.BLACK);
+		panel2.setBackground(Color.DARK_GRAY);
+		panel3.setBackground(Color.black);
 			
-		frame.add(panel1,BorderLayout.CENTER);
-		frame.add(panel2,BorderLayout.PAGE_END);
-		panel1.add(player);
-		panel1.add(name);
-		panel1.add(type);
-		panel1.add(cowboy);
-		panel1.add(ninja);
-		panel1.add(spaceman);
-		panel1.add(viking);
-		panel1.add(beginGame);
-		panel2.add(home);
-		panel2.add(dispHS);
+		frame.getContentPane().add(panel1, BorderLayout.NORTH);
+		frame.getContentPane().add(panel2, BorderLayout.CENTER);
+		frame.getContentPane().add(panel3, BorderLayout.PAGE_END);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(5,5,5,5);
+		c.anchor = GridBagConstraints.LINE_END;
+		player.setFont(new Font("Serif", Font.BOLD, 20));
+		panel1.add(player,c);
+		c.gridy++;
+		username.setFont(new Font("Serif", Font.BOLD, 20));
+		panel1.add(username,c);
 		
-		//String playerName = name.toString();
+		c.anchor = GridBagConstraints.LINE_START;
+		c.gridx = 1;
+		c.gridy = 0;
+		panel1.add(pName,c);
+		c.gridy++;
+		panel1.add(uName,c);
+		
+		
+		c.anchor = GridBagConstraints.CENTER;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 4;
+		c.fill = GridBagConstraints.CENTER;
+		type.setFont(new Font("Serif", Font.BOLD, 30));
+		type.setForeground(Color.gray);
+		panel2.add(type, c);
+		c.gridx = 0;
+		c.gridy = 3;
+		c.gridwidth = 1;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		panel2.add(cowboy,c);
+		c.gridx++;
+		panel2.add(ninja,c);
+		c.gridx++;
+		panel2.add(spaceman,c);
+		c.gridx++;
+		panel2.add(viking,c);
+		c.gridx = 0;
+		c.gridy = 4;
+		c.gridwidth = 4;
+		c.gridheight = 2;
+		c.fill = GridBagConstraints.BOTH;
+		panel2.add(beginGame,c);
+		
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		panel3.add(home,c);
+		c.gridx = 2;
+		panel3.add(dispHS,c);
+		
+		//String playerName = pName.toString();
 		
 			
 		home.addActionListener(new ActionListener() {
@@ -144,8 +195,8 @@ public class Window extends Canvas implements ActionListener, ItemListener{
 		frame.setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		frame.setFocusable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
-		frame.pack();
+		frame.setResizable(true);
+		//frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		}
